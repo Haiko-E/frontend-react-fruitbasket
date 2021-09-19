@@ -1,0 +1,9 @@
+#formcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+#formcontainer label,
+div {
+  padding: 5px;
+}

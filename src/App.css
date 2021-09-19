@@ -1,0 +1,10 @@
+.fruits {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fruits button {
+  width: 400px;
+  border-radius: 20px;
+}
