@@ -1,94 +1,85 @@
 import React from 'react';
+import Button from './Button';
+import FormInput from './FormInput';
 
 import './Form.css';
 
-function Form({ form, setForm }) {
-  function setFirstname(e) {
-    setForm({ ...form, firstname: e.target.value });
-  }
-  function setLastname(e) {
-    setForm({ ...form, lastname: e.target.value });
-  }
-  function setAge(e) {
-    setForm({ ...form, age: e.target.value });
-  }
-  function setZipcode(e) {
-    setForm({ ...form, zipcode: e.target.value });
-  }
-  function setDeliverfreq(e) {
-    setForm({ ...form, deliverfreq: e.target.value });
-  }
-  function setDeliverBy(e) {
-    setForm({ ...form, deliverBy: e.target.value });
-  }
-  function setComment(e) {
-    setForm({ ...form, comments: e.target.value });
-  }
+function Form({ form, setForm, onSubmit }) {
   function setTerms(e) {
     setForm({ ...form, terms: !e.target.defaultChecked });
   }
 
+  function onChange(e) {
+    const key = e.target.name;
+    const value = e.target.value;
+    setForm({ ...form, [key]: value });
+    console.log(key);
+    console.log(value);
+  }
+
   return (
-    <form id='formcontainer'>
-      <label htmlFor='firstname'>
-        Voornaam{' '}
-        <input
-          type='text'
-          name='firstname'
-          id='firstname'
-          value={form.firstname}
-          onChange={setFirstname}
-        />
-      </label>
-      <label htmlFor='lastname'>
-        Achternaam{' '}
-        <input
-          type='text'
-          name='lastname'
-          id='lastname'
-          value={form.lastname}
-          onChange={setLastname}
-        />
-      </label>
-      <label htmlFor='age'>
-        Leeftijd{' '}
-        <input
-          type='number'
-          name='age'
-          id='age'
-          value={form.age}
-          onChange={setAge}
-        />
-      </label>
-      <label htmlFor='zipcode'>
-        Postcode{' '}
-        <input
-          type='text'
-          name='zipcode'
-          id='zipcode'
-          value={form.zipcode}
-          onChange={setZipcode}
-        />
-      </label>
+    <form id='formcontainer' onSubmit={onSubmit}>
+      <FormInput
+        input={form.firstname}
+        setInput={onChange}
+        label='firstname'
+      >
+        Voornaam
+      </FormInput>
+      <FormInput
+        input={form.lastname}
+        setInput={onChange}
+        label='lastname'
+      >
+        Achternaam
+      </FormInput>
+      <FormInput
+        input={form.age}
+        setInput={onChange}
+        label='age'
+        type='number'
+      >
+        Leeftijd
+      </FormInput>
+      <FormInput
+        input={form.zipcode}
+        setInput={onChange}
+        label='zipcode'
+      >
+        Postcode
+      </FormInput>
+
       <label htmlFor='deliverfreq'>Bezorgfrequetie</label>
-      <select name='deliverfreq' id='deliverfrew' onChange={setDeliverfreq}>
+      <select
+        name='deliverfreq'
+        id='deliverfrew'
+        onChange={onChange}
+        value={form.deliverfreq}
+      >
         <option value='everyDay'>Iedere dag</option>
         <option value='everyWeek'>Iedere week</option>
       </select>
-      <div onChange={setDeliverBy} value={form.deliverBy}>
+      <div>
         <label htmlFor='deliverDay'>
           <input
             type='radio'
-            name='deliver'
+            name='deliverBy'
             id='deliverDay'
             value='day'
-            defaultChecked
+            checked={form.deliverBy === 'day'}
+            onChange={onChange}
           />
           Overdag
         </label>
 
         <label htmlFor='deliverNight'>
-          <input type='radio' name='deliver' id='deliverNight' value='night' />
+          <input
+            type='radio'
+            name='deliverBy'
+            id='deliverNight'
+            value='night'
+            onChange={onChange}
+          />
           Avond
         </label>
       </div>
@@ -99,7 +90,8 @@ function Form({ form, setForm }) {
         cols='30'
         rows='10'
         placeholder='Vul in'
-        onChange={setComment}
+        onChange={onChange}
+        value={form.comments}
       ></textarea>
       <div>
         <input
@@ -109,8 +101,11 @@ function Form({ form, setForm }) {
           defaultChecked={form.terms}
           onChange={setTerms}
         />
-        <label htmlFor='terms'>Ik ga akkoord met de voorwaarden</label>
+        <label htmlFor='terms'>
+          Ik ga akkoord met de voorwaarden
+        </label>
       </div>
+      <Button>Verzenden</Button>
     </form>
   );
 }

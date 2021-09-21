@@ -1,4 +1,4 @@
-.fruitcounter {
+#fruitcounter {
   display: flex;
   width: 400px;
   justify-content: space-around;
@@ -9,13 +9,13 @@
   text-align: center;
 }
 
-.fruitcounter button {
+#fruitcounter button {
   height: 20px;
   width: 30px;
   align-self: center;
 }
 
-.fruitcounter p {
+#fruitcounter p {
   align-self: center;
 }
 

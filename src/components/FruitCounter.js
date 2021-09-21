@@ -11,7 +11,7 @@ function FruitCounter({ children, amount, setAmount }) {
   }
 
   return (
-    <div className='fruitcounter'>
+    <div id='fruitcounter'>
       <h2>{children}</h2>
       <button
         type='button'

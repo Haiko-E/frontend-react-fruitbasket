@@ -28,13 +28,36 @@ function App() {
     setKiwi(0);
   }
 
-  function sendForm() {
-    console.log('aardbeien: ' + aardbei);
-    console.log('bananen: ' + banaan);
-    console.log('appels: ' + appel);
-    console.log("kiwi's: " + kiwi);
-    console.log(userInput);
+  function submitHandler(e) {
+    e.preventDefault();
+    const order = {
+      ...userInput,
+      order: {
+        aardbeien: aardbei,
+        bananen: banaan,
+        appels: appel,
+        kiwi: kiwi,
+      },
+    };
+    console.log(order);
+
+    setUserInput({
+      firstname: '',
+      lastname: '',
+      age: '',
+      zipcode: '',
+      deliverfreq: 'everyDay',
+      deliverBy: 'day',
+      comments: '',
+      terms: true,
+    });
+
+    setAardbei(0);
+    setBanaan(0);
+    setAppels(0);
+    setKiwi(0);
   }
+  console.log(userInput);
 
   return (
     <div className='fruits'>
@@ -52,8 +75,11 @@ function App() {
         🥝Kiwi's
       </FruitCounter>
       <Button clickHandler={resetAmount}>Reset</Button>
-      <Form form={userInput} setForm={setUserInput} />
-      <Button clickHandler={sendForm}>Verzenden</Button>
+      <Form
+        form={userInput}
+        setForm={setUserInput}
+        onSubmit={submitHandler}
+      />
     </div>
   );
 }
