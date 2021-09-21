@@ -57,7 +57,6 @@ function App() {
     setAppels(0);
     setKiwi(0);
   }
-  console.log(userInput);
 
   return (
     <div className='fruits'>
