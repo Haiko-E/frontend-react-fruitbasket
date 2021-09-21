@@ -1,0 +1,10 @@
+#formcontainer {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+#formcontainer label,
+div {
+  padding: 5px;
+}
